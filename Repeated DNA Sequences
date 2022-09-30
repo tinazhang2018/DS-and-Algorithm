@@ -1,0 +1,20 @@
+class Solution(object):
+    def findRepeatedDnaSequences(self, s):
+        """
+        :type s: str
+        :rtype: List[str]
+        """
+        
+        d = defaultdict(int)
+        
+        a = set()
+        
+        for i in range(len(s)-9):
+            str1 = s[i:i+10]
+            d[str1] +=1
+            
+        for k,v in d.items():
+            if v > 1:
+                a.add(k)
+                
+        return list(a)
