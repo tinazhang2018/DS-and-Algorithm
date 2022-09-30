@@ -1,0 +1,44 @@
+class Solution(object):
+    def findCircleNum(self, isConnected):
+        """
+        :type isConnected: List[List[int]]
+        :rtype: int
+        """
+        n = len(isConnected)
+        
+        k = 0
+        
+        a1 = [-1 for i in range(n)]
+        
+        p = 0
+        for i in range(n):
+            for j in range(n):
+                if i != j:
+                    if isConnected[i][j] == 1:
+                        if a1[i] == -1 and a1[j] == -1:
+                            p +=1
+                            a1[i] = p
+                            a1[j] = p
+                        elif a1[i] == -1:
+                            a1[i] = a1[j]
+                        elif a1[j] == -1:
+                            a1[j] = a1[i]
+                        else:
+                            v = a1[j]
+                            for k in range(len(a1)):
+                                if a1[k] == v:
+                                    a1[k] = a1[i]
+                                    
+        count = 0
+        
+        d1 = Counter(a1)
+        
+        for i in range(len(a1)):
+            if a1[i] == -1:
+                count += 1
+                
+        if -1 in d1:
+            return len(d1)+count-1
+        else:
+            return len(d1)
+                            
