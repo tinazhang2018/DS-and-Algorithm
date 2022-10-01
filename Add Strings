@@ -1,0 +1,33 @@
+class Solution:
+    def addStrings(self, num1: str, num2: str) -> str:
+        
+        
+        m = len(num1)
+        n = len(num2)
+        
+        i = m-1
+        j = n-1
+        
+        carry = 0
+        ans = deque()
+        
+        while ( i >=0 or j >= 0):
+            
+            s1 = carry
+            
+            if ( i >= 0):
+                s1 += int(num1[i])
+                i -= 1
+                
+            if ( j >= 0):
+                s1 += int(num2[j])
+                j -= 1
+                               
+            carry = s1//10
+            s1 = s1%10
+            ans.appendleft(str(s1))
+                               
+        if ( carry != 0):
+            ans.appendleft(str(carry))
+                               
+        return  "".join(ans)
