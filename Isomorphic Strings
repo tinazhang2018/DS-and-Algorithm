@@ -1,0 +1,27 @@
+class Solution:
+    def isIsomorphic(self, s: str, t: str) -> bool:
+        
+        
+        d1 = defaultdict(str)
+        d2 = defaultdict(str)
+        
+        if len(s) != len(t):
+            return False
+        
+        
+        for i,v in enumerate(s):
+            if v in d1:
+                if d1[v] != t[i]:
+                    return False
+            else:
+                d1[v] = t[i]
+                
+        
+        for i,v in enumerate(t):
+            if v in d2:
+                if d2[v] != s[i]:
+                    return False
+            else:
+                d2[v] = s[i]
+                
+        return True
