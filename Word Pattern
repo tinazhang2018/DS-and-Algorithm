@@ -1,0 +1,21 @@
+class Solution:
+    def wordPattern(self, pattern: str, s: str) -> bool:
+        
+        a = s.split(" ")
+        
+        if len(a) != len(pattern):
+            return False
+        
+        d1 = defaultdict(str)
+        d2 = defaultdict(str)
+        
+        for i, n in enumerate(pattern):
+            if n in d1 and d1[n] != a[i]:
+                return False
+            elif a[i] in d2 and d2[a[i]] != n:
+                return False
+            else:
+                d1[n] = a[i]
+                d2[a[i]] = n
+                
+        return True
