@@ -1,0 +1,42 @@
+class Solution(object):
+    def multiply(self, num1, num2):
+        """
+        :type num1: str
+        :type num2: str
+        :rtype: str
+        """
+        
+        
+        m = len(num1)
+        n = len(num2)
+        
+        if m == 0 or n == 0:
+            return "0"
+        elif ( num1 == "0" or num2 == "0"):
+            return "0"
+        elif ( num1 == "1"):
+            return num2
+        elif ( num2 == "1"):
+            return num1
+        
+        ans = [0]*(m+n)
+        
+        i = m-1
+        j = n-1
+        
+        for i in range(m-1, -1, -1):
+            for j in range(n-1, -1, -1):
+                p = int(num1[i])*int(num2[j])
+                p += ans[i+j+1]
+                ans[i+j+1] = p%10
+                ans[i+j] += p//10
+                
+        a = ""
+        
+        for i,v in enumerate(ans):
+            if len(a) == 0 and v == 0:
+                continue
+            else:
+                a += str(v)
+                
+        return a 
