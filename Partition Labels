@@ -1,0 +1,28 @@
+class Solution:
+    def partitionLabels(self, s: str) -> List[int]:
+        
+        
+        ans = []
+        n = len(s)
+        
+        d = defaultdict(int)
+        
+        for i in range(n):
+            d[s[i]] = i
+            
+        i = 0
+        
+        while ( i < n):
+            
+            j = i
+            end = d[s[i]]
+            
+            while ( j != end):
+                j += 1
+                end = max(end, d[s[j]])
+                
+            ans.append(j-i+1)
+            i = j+1
+            
+        return ans 
+        
