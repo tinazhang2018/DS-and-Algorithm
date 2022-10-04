@@ -1,0 +1,17 @@
+class Solution {
+    public List<String> findRepeatedDnaSequences(String s) {
+        
+        int n = s.length();
+        Set<String> seen = new HashSet();
+        
+        Set<String> out = new HashSet();
+        
+        for ( int start = 0; start < n-9; start++){
+            String tmp = s.substring(start, start+10);
+            if ( seen.contains(tmp)) out.add(tmp);
+            seen.add(tmp);
+        }
+        
+        return new ArrayList<String>(out);
+    }
+}
