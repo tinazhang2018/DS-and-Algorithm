@@ -1,0 +1,41 @@
+class Solution(object):
+    def nextClosestTime(self, time):
+        """
+        :type time: str
+        :rtype: str
+        """
+        
+        a = time.split(":")
+        hours = int(a[0])
+        mins = int(a[1])
+      
+        
+        total_mins = hours*60+mins
+        
+        #total_mins = total_mins%(60*24)
+        
+        digits = set()
+        
+        for c in time:
+            if  c >= "0" and c <= "9":
+                digits.add(int(c))
+        print(digits)
+        
+        while ( True):
+            total_mins +=1
+            
+            total_mins = total_mins%(60*24)
+            
+            a1 = [total_mins//60//10, total_mins//60%10, total_mins%60//10, total_mins%60%10]
+            print("a1", a1)
+            
+            flag = 0
+            for i in a1:
+                 if i not in digits:
+                        flag = 1
+      
+                    
+            if flag == 0:
+                get = str(a1[0])+str(a1[1])+":"+str(a1[2])+str(a1[3])
+                
+                return get
