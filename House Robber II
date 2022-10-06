@@ -1,0 +1,29 @@
+class Solution(object):
+    def rob(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        
+        if len(nums) == 0:
+            return 0
+        elif len(nums) == 1:
+            return nums[0]
+        
+        dp1 = 0
+        dp2 = 0
+        
+        for n in nums[:-1]:
+            tmp = dp1
+            dp1 = max(dp2+n, dp1)
+            dp2 = tmp
+            
+        d1 = 0
+        d2 = 0
+        
+        for n in nums[1:]:
+            tmp = d1
+            d1 = max(d2+n, d1)
+            d2 = tmp
+            
+        return max(dp1, d1)
