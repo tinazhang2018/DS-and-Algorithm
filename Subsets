@@ -1,0 +1,14 @@
+class Solution:
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        
+        ans = [[]]
+        
+        for num in nums:
+            tmp = []
+            for c in ans:
+                tmp.append(c+[num])
+                
+            ans += tmp
+            
+        return ans 
+                
