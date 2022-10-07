@@ -1,0 +1,28 @@
+class Solution(object):
+    def wordSubsets(self, words1, words2):
+        """
+        :type words1: List[str]
+        :type words2: List[str]
+        :rtype: List[str]
+        """
+        
+        d = defaultdict(int)
+        ans = []
+        
+        for w in words2:
+            a = Counter(w)
+            for k,v in a.items():
+                if d[k] < v:
+                    d[k] = v
+                
+        for w in words1:
+            b = Counter(w)
+            flag = 0
+            for k,v in d.items():
+                if k not in b or b[k] < d[k]:
+                    flag = 1
+                    
+            if flag == 0:
+                ans.append(w)
+                
+        return ans 
