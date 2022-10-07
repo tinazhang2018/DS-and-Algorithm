@@ -1,0 +1,23 @@
+class Solution(object):
+    def nextGreaterElement(self, nums1, nums2):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :rtype: List[int]
+        """
+        
+        s = []
+        
+        res = defaultdict(int)
+        
+        for num in nums2[::-1]:
+            while len(s) > 0 and num > s[-1]:
+                s.pop()
+                
+            if s:
+                res[num] = s[-1]
+            else:
+                res[num] = -1
+            s.append(num)
+            
+        return [res[n] for n in nums1]
