@@ -1,0 +1,39 @@
+class Solution(object):
+    def matrixBlockSum(self, mat, k):
+        """
+        :type mat: List[List[int]]
+        :type k: int
+        :rtype: List[List[int]]
+        """
+        
+        m = len(mat)
+        n = len(mat[0])
+        
+        rowsum = [[0 for _ in range(n)]for _ in range(m)]
+        out = [[0 for _ in range(n)] for _ in range(m)]
+     
+      
+        for i in range(m):
+            s1 = 0
+            for j in range(n):
+                s1 += mat[i][j]
+                rowsum[i][j] = s1
+                
+        print(rowsum)
+                
+        for i in range(m):
+            for j in range(n):
+                m1 = 0
+                
+                start_row = max(0, i-k)
+                end_row = min(i+k, m-1)
+                for kr in range(start_row, end_row+1):
+                    m1 += rowsum[kr][min(j+k, n-1)]
+                    if j-k > 0:
+                        m1 -= rowsum[kr][j-k-1]
+                 
+                print("m", m1)
+                out[i][j] = m1
+                
+        return out 
+                    
