@@ -1,0 +1,25 @@
+class Solution:
+    def largestOverlap(self, img1: List[List[int]], img2: List[List[int]]) -> int:
+        
+        
+        d = Counter()
+        
+        
+        n = len(img1)
+        
+        for i1,r1 in enumerate(img1):
+            for j1, c1 in enumerate(r1):
+                if c1 == 1 :
+                    for i2, r2 in enumerate(img2):
+                        for j2, c2 in enumerate(r2):
+                                if c2 == 1:
+                                    a1 = i1-i2
+                                    b1 = j1-j2
+                                                
+                                    str1 = str(a1)+"_"+str(b1)
+                                    d[a1,b1] += 1
+                                                
+        if len(d) == 0:
+            return 0
+        else:
+            return(max(d.values()))
