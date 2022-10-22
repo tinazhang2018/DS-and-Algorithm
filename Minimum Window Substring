@@ -1,0 +1,47 @@
+class Solution(object):
+    def minWindow(self, s, t):
+        """
+        :type s: str
+        :type t: str
+        :rtype: str
+        """
+        
+        
+        l, r = 0, 0
+        
+        h = Counter(t)
+        wd = defaultdict(int)
+        
+        ans = ""
+        count = len(h)
+        m1 = float("inf")
+        
+        n = len(s)
+        
+        while r < n:
+            
+            c = s[r]
+            if c in h:
+                wd[c] += 1
+                if wd[c] == h[c]:
+                    count -= 1
+                    
+                
+            while l <= r and count == 0:
+                ch1 = s[l]
+                d = r-l+1
+                
+                if d < m1:
+                    m1 = d
+                    ans = s[l:r+1]
+                    
+                if ch1 in h:
+                    wd[ch1] -= 1
+                    if wd[ch1] < h[ch1]:
+                        count += 1
+                        
+                l += 1
+                
+            r += 1
+            
+        return ans 
