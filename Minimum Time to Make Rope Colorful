@@ -1,0 +1,31 @@
+class Solution(object):
+    def minCost(self, colors, neededTime):
+        """
+        :type colors: str
+        :type neededTime: List[int]
+        :rtype: int
+        """
+        
+        n = len(colors)
+        
+        start = 0
+        end = 0
+        
+        total = 0
+        
+        while ( start < n and end < n):
+            
+            grouptime = 0
+            maxtime = 0
+            
+            while ( end < n and  colors[start] == colors[end]):
+                maxtime = max(maxtime, neededTime[end])
+                grouptime += neededTime[end]
+                end += 1
+                
+            get = grouptime-maxtime
+            
+            total += get
+            start = end 
+            
+        return total 
