@@ -1,0 +1,21 @@
+        d = defaultdict()
+        s = 0  
+        d[0] = -1
+
+
+        for i in range(len(nums)):
+             s += nums[i]
+              
+             if k != 0:
+                m = s%k
+                
+                if m not in d:
+                    d[m] = i
+                    
+                elif m in d:
+                    if ( i - d[m]) >= 2:
+                        return True
+           
+                    
+        return False 
+            
