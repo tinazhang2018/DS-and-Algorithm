@@ -1,0 +1,36 @@
+class Solution:
+    def findBall(self, grid: List[List[int]]) -> List[int]:
+        
+        
+        m = len(grid)
+        n = len(grid[0])
+        
+        ans = [-1]*n 
+        
+        for j in range(n):
+            x = 0
+            y = j
+            
+            while ( x < m):
+                if grid[x][y] == 1:
+                    if y == n-1:
+                        break
+                    elif grid[x][y+1] == -1:
+                        break;
+                    else:
+                        x += 1
+                        y += 1
+                        
+                else:
+                    if y == 0:
+                        break
+                    elif grid[x][y-1] == 1:
+                        break;
+                    else:
+                        x += 1
+                        y -= 1
+                        
+            if x == m:
+                ans[j] = y
+                
+        return ans 
