@@ -1,0 +1,47 @@
+class Solution {
+    public int[] findBall(int[][] grid) {
+        
+        int m = grid.length;
+        int n = grid[0].length;
+        
+        int[] ans = new int[n];
+        Arrays.fill(ans, -1);
+        
+        for ( int j = 0; j < n; j++) {
+            
+            int x = 0;
+            int y = j;
+            
+            while ( x < m) {
+                
+                if ( grid[x][y] == 1) {
+                    if ( y == (n-1)) {
+                        break;
+                    } else if ( grid[x][y+1] == -1) {
+                        break;
+                    } else {
+                        x++;
+                        y++;
+                    }
+                    
+                } else {
+                    if ( y == 0) {
+                        break;
+                    } else if ( grid[x][y-1] == 1) {
+                        break;
+                    } else {
+                        x++;
+                        y--;
+                    }           
+                   
+                }
+            }            
+            if ( x == m ) {
+                ans[j] = y;
+            }
+        }
+        
+        return ans; 
+        
+    }
+}
