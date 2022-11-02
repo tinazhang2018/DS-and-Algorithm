@@ -1,0 +1,29 @@
+class Solution(object):
+    def minMutation(self, start, end, bank):
+        """
+        :type start: str
+        :type end: str
+        :type bank: List[str]
+        :rtype: int
+        """
+        a = [(start, 0)]
+        
+        q = deque(a)
+        
+        seen = {start}
+        
+        while q:
+            node, steps = q.popleft()
+            
+            if node == end:
+                return steps
+            
+            for c in "ACGT":
+                for i in range(len(node)):
+                    nei = node[:i]+c+node[i+1:]
+                    
+                    if nei not in seen and nei in bank:
+                        q.append((nei, steps+1))
+                        seen.add(nei)
+                        
+        return -1 
