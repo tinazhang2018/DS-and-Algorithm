@@ -1,0 +1,50 @@
+class Solution:
+    def orangesRotting(self, grid: List[List[int]]) -> int:
+        
+        rotten = defaultdict(int)
+        fresh = defaultdict(int)
+        
+        
+        m = len(grid)
+        n = len(grid[0])
+        
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j] == 1:
+                    s1 = str(i)+"_"+str(j)
+                    fresh[s1] = 1
+                
+                if grid[i][j] == 2:
+                    s2 = str(i)+"_"+str(j)
+                    rotten[s2] = 1
+                    
+                    
+        min1 = 0
+        
+        dir1 = [[1,0], [-1, 0], [0, 1], [0, -1]]
+        
+        while ( len(fresh) > 0):
+            
+            infected = defaultdict(int)
+            for s in rotten.keys():
+                a = s.split("_")
+                i = int(a[0])
+                j = int(a[1])
+                
+                for d in dir1:
+                    dx = i+d[0]
+                    dy = j+d[1]
+                    
+                    ns = str(dx)+"_"+str(dy)
+                    
+                    if ( ns in fresh):
+                        del fresh[ns]
+                        infected[ns] = 1
+                        
+            if ( len(infected) == 0):
+                return -1
+            
+            rotten = infected
+            min1+=1
+            
+        return(min1)
