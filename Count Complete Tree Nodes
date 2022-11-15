@@ -1,0 +1,32 @@
+       self.left = left
+#         self.right = right
+class Solution(object):
+    def countNodes(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        s = deque()
+        
+        if root is None:
+            return 0
+        
+        s.append(root)
+        count = 1
+        
+        while s:
+            size = len(s)
+            
+            while size > 0:
+                node = s.popleft()
+                size -= 1
+                if node.left:
+                    count +=1
+                    s.append(node.left)
+                    
+                if node.right:
+                    count +=1
+                    s.append(node.right)
+                    
+        return count 
+                    
