@@ -1,0 +1,50 @@
+      def dfs(i,j, t1):
+            letter = board[i][j]
+            cur = t1[letter]
+            
+            if '#' in cur:
+                res.append(cur['#'])
+                cur.pop('#')
+            
+            board[i][j] = '*'
+            
+            dir1 = [(0,1), (0, -1), (1,0), (-1, 0)]
+            
+            for d in dir1:
+                dx = i+d[0]
+                dy = j+d[1]
+                
+                if 0<= dx < m and 0 <= dy < n and board[dx][dy] in cur:
+                    dfs(dx,dy, cur)
+                    
+            board[i][j] = letter
+            if not cur:
+                t1.pop(letter)
+        
+        
+        
+        
+        trie = {}
+        res = []
+        
+        for word in words:
+            tmp = trie
+            
+            for c in word:
+                if c not in tmp:                    
+                     tmp[c] = {}
+                tmp = tmp[c]
+                    
+            tmp['#'] = word
+            
+        m = len(board)
+        n = len(board[0])
+        
+        for i in range(m):
+            for j in range(n):
+                a = board[i][j]
+                if a in trie:
+                    dfs(i,j, trie)
+
+                    
+        return res      
