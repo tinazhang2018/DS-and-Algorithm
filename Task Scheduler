@@ -1,0 +1,28 @@
+class Solution:
+    def leastInterval(self, tasks: List[str], n: int) -> int:
+        
+        count = Counter(tasks)
+        
+        h = []
+        
+        for k,v in count.items():
+            heapq.heappush(h, (-v, k))
+            
+        item = heapq.heappop(h)
+        maxf = -item[0]
+        
+        idle_time = (maxf-1)*n
+       
+        while h:
+            item = heapq.heappop(h)
+            
+            freq = -item[0]
+            
+            get = min((maxf-1), freq)
+            
+            idle_time -= get
+            
+        idle_time = max(0, idle_time)
+        
+        return idle_time+len(tasks)
+            
