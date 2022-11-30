@@ -1,0 +1,33 @@
+class Solution:
+    def findWinners(self, matches: List[List[int]]) -> List[List[int]]:
+        
+        
+        losers = defaultdict(int)
+        winners = defaultdict(int)
+        
+        for match in matches:
+            winner = match[0]
+            loser = match[1]
+            
+            losers[loser] += 1
+            winners[winner] += 1
+            
+        alist = []
+        blist = []
+        
+        for k,v in winners.items():
+            if k not in losers:
+                alist.append(k)
+                
+        for k,v in losers.items():        
+            if  losers[k] == 1:
+                blist.append(k)
+                
+        ans = []
+        
+        alist.sort()
+        blist.sort()
+        ans.append(alist)
+        ans.append(blist)
+        
+        return ans 
