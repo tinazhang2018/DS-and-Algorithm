@@ -1,0 +1,34 @@
+class Solution(object):
+    def closeStrings(self, word1, word2):
+        """
+        :type word1: str
+        :type word2: str
+        :rtype: bool
+        """
+        
+        a1 = Counter(word1)
+        a2 = Counter(word2)
+        
+        aset = set(list(word1))
+        bset = set(list(word2))
+        
+        if aset != bset:
+            return False
+        
+        alist = []
+        blist = []
+        
+        for k,v in a1.items():
+            alist.append(v)
+            
+        for k,v in a2.items():
+            blist.append(v)
+        
+            
+        print("alist", alist)
+        print("blist", blist)
+            
+        if sorted(alist) == sorted(blist):
+            return True
+        else:
+            return False 
